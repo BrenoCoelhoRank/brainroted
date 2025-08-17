@@ -1,3 +1,4 @@
+/* Importando fontes */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@500;700&display=swap');
 
 :root {
@@ -6,6 +7,9 @@
     --cor-secundaria: #2C2F54;
     --cor-destaque: #FF4C60;
     --cor-texto: #F0F0F5;
+
+    --fonte-principal: 'Roboto', sans-serif;     /* corpo do texto */
+    --fonte-titulo: 'Orbitron', sans-serif;      /* títulos futuristas */
 }
 
 body {
@@ -16,6 +20,7 @@ body {
     align-items: center;
     min-height: 100vh;
     font-size: 18px;
+    font-family: var(--fonte-principal);
 }
 
 .caixa-principal {
@@ -30,6 +35,7 @@ body {
 h1 {
     color: var(--cor-destaque);
     font-size: 2.5rem;
+    font-family: var(--fonte-titulo);
 }
 
 button {
@@ -39,6 +45,7 @@ button {
     border-radius: 20px;
     padding: 18px 25px;
     font-size: 1.1rem;
+    font-family: var(--fonte-principal);
     cursor: pointer;
     transition: 0.3s ease;
 }
@@ -48,3 +55,4 @@ button:hover {
     color: var(--cor-principal);
     transform: scale(1.05);
 }
+

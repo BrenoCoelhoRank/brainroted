@@ -1,40 +1,46 @@
+const caixaPrincipal = document.querySelector(".caixa-principal");
+const caixaPerguntas = document.querySelector(".caixa-perguntas");
+const caixaAlternativas = document.querySelector(".caixa-alternativas");
+const caixaResultado = document.querySelector(".caixa-resultado");
+const textoResultado = document.querySelector(".texto-resultado");
+
 const perguntas = [
     {
         enunciado: "Assim que você sai da escola, se depara com uma nova tecnologia: um chat capaz de responder praticamente qualquer dúvida, além de gerar imagens e áudios hiper-realistas. Qual é a sua primeira reação?",
         alternativas: [
             {
                 texto: "Isso é perturbador!",
-                afirmacao: "No começo, você ficou desconfiado da IA."
+                afirmacao: "afirmação"
             },
             {
                 texto: "Isso é incrível!",
-                afirmacao: "Desde o início, você enxergou a IA como algo fascinante."
+                afirmacao: "afirmação" 
             }
         ]
     },
     {
-        enunciado: "Com a popularização dessa tecnologia, chamada Inteligência Artificial (IA), uma professora decidiu preparar uma série de aulas sobre o tema. No final de uma delas, ela pede um trabalho sobre o uso da IA em sala de aula. O que você faz?",
+        enunciado: "Com a popularização dessa tecnologia, chamada Inteligência Artificial (IA), uma professora de tecnologia da escola decidiu preparar uma série de aulas sobre o tema. No final de uma delas, ela pede um trabalho sobre o uso da IA em sala de aula. O que você faz?",
         alternativas: [
             {
-                texto: "Usa uma ferramenta com IA para buscar informações úteis e explicadas de forma simples.",
-                afirmacao: "Você aprendeu a usar a IA como aliada no aprendizado."
+                texto: "Usa uma ferramenta com IA para buscar informações úteis e explicadas de forma simples, facilitando a escrita do trabalho.",
+                afirmacao: "afirmação"
             },
             {
-                texto: "Produz o trabalho a partir de conversas com colegas e pesquisas próprias.",
-                afirmacao: "Você preferiu confiar mais no esforço humano e na troca de ideias."
+                texto: "Produz o trabalho a partir de conversas com colegas, algumas pesquisas na internet e seus próprios conhecimentos.",
+                afirmacao: "afirmação"
             }
         ]
     },
     {
-        enunciado: "Depois de entregar o trabalho, a professora promoveu um debate sobre como a IA pode impactar os empregos no futuro. Qual posição você defende?",
+        enunciado: "Depois de entregar o trabalho, a professora promoveu um debate sobre como cada aluno realizou a pesquisa. Nesse momento, também surgiu a questão de como a IA pode impactar os empregos no futuro. Qual posição você defende?",
         alternativas: [
             {
-                texto: "Acredito que a IA pode abrir novas oportunidades e aprimorar habilidades humanas.",
-                afirmacao: "No debate, você destacou o lado positivo da tecnologia."
+                texto: "Acredito que a IA pode abrir novas oportunidades de emprego e aprimorar habilidades humanas.",
+                afirmacao: "afirmação"
             },
             {
-                texto: "Tenho preocupação com quem pode perder empregos para máquinas.",
-                afirmacao: "No debate, você levantou a importância de proteger os trabalhadores."
+                texto: "Tenho preocupação com quem pode perder empregos para máquinas e defendo medidas para proteger os trabalhadores.",
+                afirmacao: "afirmação"
             }
         ]
     },
@@ -43,25 +49,64 @@ const perguntas = [
         alternativas: [
             {
                 texto: "Criar manualmente usando um programa simples como o Paint.",
-                afirmacao: "Você escolheu representar sua visão de forma manual e criativa."
+                afirmacao: "afirmação"
             },
             {
                 texto: "Gerar uma imagem automaticamente usando uma IA.",
-                afirmacao: "Você preferiu usar a própria IA para traduzir suas ideias em imagem."
+                afirmacao: "afirmação"
             }
         ]
     },
     {
-        enunciado: "Na semana seguinte, você tem um trabalho de biologia em grupo. Um colega decidiu usar a IA para fazer quase tudo, mas o texto ficou idêntico ao do chat. O que você faz?",
+        enunciado: "Na semana seguinte, você tem um trabalho de biologia em grupo. O projeto está atrasado, e um colega decidiu usar uma IA para produzir quase tudo. O problema é que o texto ficou idêntico ao do chat. O que você faz?",
         alternativas: [
             {
-                texto: "Acho que não há problema em entregar exatamente como a IA fez.",
-                afirmacao: "No grupo, você aceitou o trabalho sem mudanças."
+                texto: "Acredito que escrever comandos já é contribuir, então não vejo problema em usar o texto da IA sem alterações.",
+                afirmacao: "afirmação"
             },
             {
-                texto: "Acho importante revisar e incluir ideias próprias além da IA.",
-                afirmacao: "No grupo, você defendeu a importância da revisão e do olhar humano."
+                texto: "A IA é útil, mas pode cometer erros. Por isso, revisar o material e acrescentar ideias próprias é fundamental.",
+                afirmacao: "afirmação"
             }
         ]
     },
 ];
+
+let atual = 0;
+let perguntaAtual;
+let historiaFinal = "";
+
+function mostraPergunta() {
+    if (atual >= perguntas.length) {
+        mostraResultado();
+        return;
+    }
+    perguntaAtual = perguntas[atual];
+    caixaPerguntas.textContent = perguntaAtual.enunciado;
+    caixaAlternativas.textContent = "";
+    mostraAlternativas();
+}
+
+function mostraAlternativas() {
+    for (const alternativa of perguntaAtual.alternativas) {
+        const botaoAlternativas = document.createElement("button");
+        botaoAlternativas.textContent = alternativa.texto;
+        botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
+        caixaAlternativas.appendChild(botaoAlternativas);
+    }
+}
+
+function respostaSelecionada(opcaoSelecionada) {
+    const afirmacoes = opcaoSelecionada.afirmacao;
+    historiaFinal += afirmacoes + " ";
+    atual++;
+    mostraPergunta();
+}
+
+function mostraResultado() {
+    caixaPerguntas.textContent = "Em 2049...";
+    textoResultado.textContent = historiaFinal;
+    caixaAlternativas.textContent = "";
+}
+
+mostraPergunta();

@@ -1,20 +1,14 @@
-const caixaPrincipal = document.querySelector(".caixa-principal");
-const caixaPerguntas = document.querySelector(".caixa-perguntas");
-const caixaAlternativas = document.querySelector(".caixa-alternativas");
-const caixaResultado = document.querySelector(".caixa-resultado");
-const textoResultado = document.querySelector(".texto-resultado");
-
 const perguntas = [
     {
         enunciado: "Assim que você sai da escola, se depara com uma nova tecnologia: um chat capaz de responder praticamente qualquer dúvida, além de gerar imagens e áudios hiper-realistas. Qual é a sua primeira reação?",
         alternativas: [
             {
                 texto: "Isso é perturbador!",
-                afirmacao: "afirmação"
+                afirmacao: "No início, você sentiu medo dessa nova tecnologia."
             },
             {
                 texto: "Isso é incrível!",
-                afirmacao: "afirmação" 
+                afirmacao: "Logo de cara, você ficou maravilhado com as possibilidades."
             }
         ]
     },
@@ -23,11 +17,11 @@ const perguntas = [
         alternativas: [
             {
                 texto: "Usa uma ferramenta com IA para buscar informações úteis e explicadas de forma simples, facilitando a escrita do trabalho.",
-                afirmacao: "afirmação"
+                afirmacao: "Você aprendeu a usar a IA como aliada no aprendizado."
             },
             {
                 texto: "Produz o trabalho a partir de conversas com colegas, algumas pesquisas na internet e seus próprios conhecimentos.",
-                afirmacao: "afirmação"
+                afirmacao: "Você preferiu confiar no esforço pessoal e na colaboração."
             }
         ]
     },
@@ -36,11 +30,11 @@ const perguntas = [
         alternativas: [
             {
                 texto: "Acredito que a IA pode abrir novas oportunidades de emprego e aprimorar habilidades humanas.",
-                afirmacao: "afirmação"
+                afirmacao: "No debate, você defendeu o lado positivo da tecnologia."
             },
             {
                 texto: "Tenho preocupação com quem pode perder empregos para máquinas e defendo medidas para proteger os trabalhadores.",
-                afirmacao: "afirmação"
+                afirmacao: "No debate, você destacou a importância da proteção social."
             }
         ]
     },
@@ -49,11 +43,11 @@ const perguntas = [
         alternativas: [
             {
                 texto: "Criar manualmente usando um programa simples como o Paint.",
-                afirmacao: "afirmação"
+                afirmacao: "Sua criatividade se manifestou de forma tradicional."
             },
             {
                 texto: "Gerar uma imagem automaticamente usando uma IA.",
-                afirmacao: "afirmação"
+                afirmacao: "Você apostou no poder da IA para expressar sua visão."
             }
         ]
     },
@@ -62,51 +56,12 @@ const perguntas = [
         alternativas: [
             {
                 texto: "Acredito que escrever comandos já é contribuir, então não vejo problema em usar o texto da IA sem alterações.",
-                afirmacao: "afirmação"
+                afirmacao: "No grupo, você aceitou a contribuição da IA sem mudanças."
             },
             {
                 texto: "A IA é útil, mas pode cometer erros. Por isso, revisar o material e acrescentar ideias próprias é fundamental.",
-                afirmacao: "afirmação"
+                afirmacao: "No grupo, você defendeu a importância da revisão e do olhar humano."
             }
         ]
     },
 ];
-
-let atual = 0;
-let perguntaAtual;
-let historiaFinal = "";
-
-function mostraPergunta() {
-    if (atual >= perguntas.length) {
-        mostraResultado();
-        return;
-    }
-    perguntaAtual = perguntas[atual];
-    caixaPerguntas.textContent = perguntaAtual.enunciado;
-    caixaAlternativas.textContent = "";
-    mostraAlternativas();
-}
-
-function mostraAlternativas() {
-    for (const alternativa of perguntaAtual.alternativas) {
-        const botaoAlternativas = document.createElement("button");
-        botaoAlternativas.textContent = alternativa.texto;
-        botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
-        caixaAlternativas.appendChild(botaoAlternativas);
-    }
-}
-
-function respostaSelecionada(opcaoSelecionada) {
-    const afirmacoes = opcaoSelecionada.afirmacao;
-    historiaFinal += afirmacoes + " ";
-    atual++;
-    mostraPergunta();
-}
-
-function mostraResultado() {
-    caixaPerguntas.textContent = "Em 2049...";
-    textoResultado.textContent = historiaFinal;
-    caixaAlternativas.textContent = "";
-}
-
-mostraPergunta();
